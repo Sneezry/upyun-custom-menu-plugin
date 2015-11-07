@@ -1,0 +1,56 @@
+{
+  "extName": {
+    "message": "UPYUN 自定义菜单插件",
+    "description": "Extension Name"
+  },
+
+  "extDesc": {
+    "message": "在 UPYUN 网页控制台中添加自定义菜单。",
+    "description": "Extension Description"
+  },
+
+  "close": {
+    "message": "关闭",
+    "description": "Close"
+  },
+
+  "CM_upload": {
+    "message": "上传文件",
+    "description": "Custom Menu Name"
+  },
+
+  "CML_form_secret": {
+    "message": "表单密钥",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_form_secret_save": {
+    "message": "保存",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_change_secret": {
+    "message": "更改密钥",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_upload_path": {
+    "message": "路径",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_upload_file": {
+    "message": "选择文件",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_upload_start": {
+    "message": "开始上传",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_upload_again": {
+    "message": "重新上传",
+    "description": "Custom Menu Layout Text"
+  }
+}

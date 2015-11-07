@@ -1,0 +1,32 @@
+<div class="cm_upload">
+  <div id="set_form_secret" class="form-inline">
+    <div class="form-group">
+      <label for="form_secret" id="form_secret_label"></label>
+      <input type="text" class="form-control" id="form_secret">
+    </div>
+    <button class="btn btn-primary" id="form_secret_btn"></button>
+  </div>
+  <div id="upload_window">
+    <div class="form-group">
+      <label for="upload_bucket">Bucket</label>
+      <input type="text" class="form-control" id="upload_bucket" disabled>
+    </div>
+    <div class="form-group">
+      <label for="upload_path" id="upload_path_label"></label>
+      <input type="text" class="form-control" id="upload_path">
+    </div>
+    <div class="form-group">
+      <label for="upload_file" id="upload_file_label"></label>
+      <input type="file" id="upload_file">
+    </div>
+    <button class="btn btn-default" id="change_secret_btn"></button>
+    <button class="btn btn-primary" id="upload_start_btn"></button>
+  </div>
+  <div id="upload_result">
+    <p><a id="upload_url" target="_blank"></a></p>
+  </div>
+  <div id="upload_error">
+    <p id="upload_error_message"></p>
+    <button class="btn btn-default" id="upload_again_btn"></button>
+  </div>
+</div>

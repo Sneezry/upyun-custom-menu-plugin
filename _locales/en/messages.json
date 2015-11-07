@@ -1,0 +1,56 @@
+{
+  "extName": {
+    "message": "UPYUN Custom Menu Plug-In",
+    "description": "Extension Name"
+  },
+
+  "extDesc": {
+    "message": "Add custom menus into UPYUN web console.",
+    "description": "Extension Description"
+  },
+
+  "close": {
+    "message": "Close",
+    "description": "Close"
+  },
+
+  "CM_upload": {
+    "message": "Upload File",
+    "description": "Custom Menu Name"
+  },
+
+  "CML_form_secret": {
+    "message": "Form Secret",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_form_secret_save": {
+    "message": "Save",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_change_secret": {
+    "message": "Change Secret",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_upload_path": {
+    "message": "Path",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_upload_file": {
+    "message": "Select File",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_upload_start": {
+    "message": "Upload Start",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_upload_again": {
+    "message": "Upload Again",
+    "description": "Custom Menu Layout Text"
+  }
+}

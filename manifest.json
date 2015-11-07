@@ -1,0 +1,34 @@
+{
+    "manifest_version": 2,
+    "name": "__MSG_extName__",
+    "version": "1.0",
+    "default_locale": "en",
+    "description": "__MSG_extDesc__",
+    "icons": {
+        "48": "images/logo.png",
+        "128": "images/logo.png"
+    },
+    "background": {
+        "scripts": [
+            "lib/md5.js",
+            "api/upyun-rest-api.js",
+            "js/custom-menu.js",
+            "js/background.js"
+        ],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://console.upyun.com/"],
+            "js": ["js/functions.js", "js/controller.js", "js/content.js"],
+            "css": ["css/custom-menu-layout.css"]
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "*://*.upyun.com/*"
+    ],
+    "web_accessible_resources": [
+        "layout/*.html"
+    ]
+}
