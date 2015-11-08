@@ -8,9 +8,8 @@
 
 ## 添加自定义菜单数据
 
-编辑`js/custom-menu.js`，以菜单名作为`key`扩充`customMenuData`对象，每个自定义菜单包含3个属性，`parentMenu`、`layout`和`controller`，其中`parentMenu`为必选项，代表自定义菜单要插入的父系菜单名，“通用”为“general”，“
-CDN 设置”为“cdn”，“防盗链”为“antileech”，“监控”为“monitor”，“日志”为“logs”，“工具箱”为“toolbox”，“费用中心”为“billing”，“
-帐号管理”为“account”。
+编辑`js/custom-menu.js`，以菜单名作为`key`扩充`customMenuData`对象，每个自定义菜单包含3个属性，`parentMenu`、`layout`和`controller`，其中`parentMenu`为必选项，代表自定义菜单要插入的父系菜单名，“通用”为“general”，“CDN 设置”为“cdn”，“防盗链”为“antileech”，“监控”为“monitor”，“日志”为“logs”，“工具箱”为“toolbox”，“费用中心”为“billing”，“
+帐号管理”为“account”。注意，应避免选择`cdn`作为`parent`，因为“CDN 设置”菜单并不总是可用的。
 
 `layout`可选，如果制定了`layout`，应在`layout/`下创建相应名称的HTML文件，带有`layout`属性的自定义菜单被点击后会在UPYUN控制台上弹出包含此`layout`的浮动层。
 
