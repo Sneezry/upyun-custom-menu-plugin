@@ -1,6 +1,0 @@
-var customMenuData = {
-  "upload" : {
-    "parentMenu" : "generate",
-    "controller" : "uploadFiles"
-  }
-}
