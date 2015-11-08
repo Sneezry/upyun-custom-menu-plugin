@@ -8,7 +8,7 @@
 var UPYUN = function(options) {
   // Default options
   this.options = {
-    server: 'v0.api.upyun.com'
+    server: 'v1.api.upyun.com'
   };
 
   var customOptionsItem;
@@ -18,49 +18,50 @@ var UPYUN = function(options) {
   }
 };
 
-UPYUN.prototype.request = function(path, parameter, file, callback) {
-  parameter['expiration'] = Math.ceil(new Date().getTime() / 1000) + 600;
+UPYUN.prototype.getSignature = function(method, path, datalength) {
+  var str = method.toUpperCase() + '&' + path + '&' +
+            new Date().toGMTString() + '&' + datalength + '&' + hex_md5(this.options.password);
 
-  var scope = this,
-      url = 'http://' + scope.options.server + '/' + path,
+  return 'UpYun ' + this.options.operator + ':' + hex_md5(str);
+};
+
+UPYUN.prototype.request = function(method, path, data, datalength, headers, callback) {
+
+  var headerKey,
+      scope = this,
+      url = 'http://' + scope.options.server + path,
       xhr = new XMLHttpRequest(),
-      policy = btoa(JSON.stringify(parameter)),
-      signature = hex_md5(policy + '&' + scope.options.secret),
-      formData = new FormData();
+      authorization = scope.getSignature(method, path, datalength);
 
-  formData.append('policy', policy);
-  formData.append('signature', signature);
-  if (file) {
-    formData.append('file', file);
+  xhr.open(method, url, true);
+  xhr.setRequestHeader('Authorization', authorization);
+
+  for (headerKey in headers) {
+    xhr.setRequestHeader(headerKey, headers[headerKey]);
   }
 
-  xhr.open('POST', url, true);
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         callback({
           code: 0,
-          message: 'http://' + parameter.bucket + '.b0.upaiyun.com' + JSON.parse(xhr.responseText).url
+          message: 'success'
         });
       } else {
         callback({
           code: 1,
-          message: JSON.parse(xhr.responseText).message
+          message: JSON.parse(xhr.responseText).msg
         });
       }
     }
   }
-  xhr.send(formData);
+  xhr.send(data);
 };
 
-UPYUN.prototype.upload = function(bucket, relativePath, file, filename, filetype, callback) {
+UPYUN.prototype.upload = function(bucket, relativePath, file, filename, filesize, callback) {
   var scope = this,
       parameter = {},
-      path = '/' + (relativePath ? relativePath + '/' : '') + filename;
+      path = '/' + bucket + '/' + (relativePath ? relativePath + '/' : '') + filename;
 
-  parameter['bucket'] = bucket;
-  parameter['save-key'] = path;
-  parameter['content-type'] = filetype;
-
-  scope.request(bucket, parameter, file, callback);
+  scope.request('PUT', path, file, filesize, {}, callback);
 };

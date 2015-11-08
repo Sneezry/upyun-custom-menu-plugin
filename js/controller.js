@@ -14,8 +14,8 @@ customMenuController.uploadFiles = function(submenu) {
 
   document.getElementById('upload_bucket').value = getBucketName();
 
-  if (!localStorage['form_secret_' + getBucketName()]) {
-    document.getElementsByClassName('cm_upload')[0].setAttribute('data-step', 'set_form_secret');
+  if (!localStorage['operator_name_' + getBucketName()] || !localStorage['operator_password_' + getBucketName()]) {
+    document.getElementsByClassName('cm_upload')[0].setAttribute('data-step', 'set_operator');
   } else {
     document.getElementsByClassName('cm_upload')[0].setAttribute('data-step', 'upload_window');
   }

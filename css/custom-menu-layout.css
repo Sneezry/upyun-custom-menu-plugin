@@ -31,7 +31,7 @@
   display: none;
 }
 
-.cm_upload[data-step="set_form_secret"] > #set_form_secret,
+.cm_upload[data-step="set_operator"] > #set_operator,
 .cm_upload[data-step="upload_window"] > #upload_window,
 .cm_upload[data-step="upload_result"] > #upload_result,
 .cm_upload[data-step="upload_error"] > #upload_error {

@@ -19,18 +19,23 @@
     "description": "Custom Menu Name"
   },
 
-  "CML_form_secret": {
-    "message": "Form Secret",
+  "CML_operator_name": {
+    "message": "Operator Name",
     "description": "Custom Menu Layout Text"
   },
 
-  "CML_form_secret_save": {
+  "CML_operator_password": {
+    "message": "Operator Password",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_operator_save": {
     "message": "Save",
     "description": "Custom Menu Layout Text"
   },
 
-  "CML_change_secret": {
-    "message": "Change Secret",
+  "CML_change_operator": {
+    "message": "Change Operator",
     "description": "Custom Menu Layout Text"
   },
 

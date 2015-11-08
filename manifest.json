@@ -14,8 +14,7 @@
             "api/upyun-rest-api.js",
             "js/custom-menu.js",
             "js/background.js"
-        ],
-        "persistent": false
+        ]
     },
     "content_scripts": [
         {
@@ -26,6 +25,8 @@
     ],
     "permissions": [
         "tabs",
+        "webRequest",
+        "webRequestBlocking",
         "*://*.upyun.com/*"
     ],
     "web_accessible_resources": [

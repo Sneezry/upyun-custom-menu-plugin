@@ -36,15 +36,30 @@ function base64toBlob(base64Data, contentType, filename) {
 
 function upyunAPIUpload(options, sender) {
   upyun = new UPYUN({
-    secret: options.secret
+    operator: options.operator,
+    password: options.password
   });
 
   var file = base64toBlob(options.base64Data, options.fileType, options.fileName);
 
-  upyun.upload(options.bucket, options.path, file, options.fileName, options.fileType, function(result) {
+  upyun.upload(options.bucket, options.path, file, options.fileName, options.fileSize, function(result) {
     chrome.tabs.sendMessage(sender.tab.id, {
       action: 'upyun_api_upload_message',
+      bucket: options.bucket,
+      path:  options.path,
+      filename: options.fileName,
       data: result
     })
   });
 };
+
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  function(details) {
+    details.requestHeaders.push({
+      name: 'Date',
+      value: new Date().toGMTString()
+    });
+    return {requestHeaders: details.requestHeaders};
+  },
+  {urls: ["*://*.api.upyun.com/*"]},
+  ["blocking", "requestHeaders"]);

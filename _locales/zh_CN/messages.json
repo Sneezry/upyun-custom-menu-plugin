@@ -19,18 +19,23 @@
     "description": "Custom Menu Name"
   },
 
-  "CML_form_secret": {
-    "message": "表单密钥",
+  "CML_operator_name": {
+    "message": "操作员用户名",
     "description": "Custom Menu Layout Text"
   },
 
-  "CML_form_secret_save": {
+  "CML_operator_password": {
+    "message": "操作员密码",
+    "description": "Custom Menu Layout Text"
+  },
+
+  "CML_operator_save": {
     "message": "保存",
     "description": "Custom Menu Layout Text"
   },
 
-  "CML_change_secret": {
-    "message": "更改密钥",
+  "CML_change_operator": {
+    "message": "更改操作员",
     "description": "Custom Menu Layout Text"
   },
 
