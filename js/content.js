@@ -175,4 +175,4 @@ function init() {
   startInsertCustomMenu();
 }
 
-init();
+setTimeout(init, 1000);

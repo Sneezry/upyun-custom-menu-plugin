@@ -42,26 +42,86 @@ UPYUN.prototype.request = function(method, path, data, datalength, headers, call
 
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        callback({
-          code: 0,
-          message: 'success'
-        });
-      } else {
-        callback({
-          code: 1,
-          message: JSON.parse(xhr.responseText).msg
-        });
+      var code, data;
+
+      code = xhr.status === 200 ? 0 : 1;
+
+      try {
+        data = JSON.parse(xhr.responseText)
+      } catch(e) {
+        data = {
+          msg: xhr.responseText
+        }
       }
+
+      callback({
+        code: code,
+        headers: xhr.getAllResponseHeaders(),
+        data: data
+      });
     }
   }
   xhr.send(data);
 };
 
-UPYUN.prototype.upload = function(bucket, relativePath, file, filename, filesize, callback) {
+UPYUN.prototype.upload = function(bucket, relativePath, file, filesize, callback) {
   var scope = this,
-      parameter = {},
-      path = '/' + bucket + '/' + (relativePath ? relativePath + '/' : '') + filename;
+      path = '/' + bucket + '/' + relativePath;
 
-  scope.request('PUT', path, file, filesize, {}, callback);
+  scope.request('PUT', path, file, filesize, {}, function(result){
+    if (0 === result.code) {
+      callback({
+        code: 0,
+        data: {
+          url: 'http://' + bucket + '.b0.upaiyun.com/' + relativePath
+        }
+      });
+    } else {
+      callback({
+        code: 1,
+        data: {
+          message: result.data.msg
+        }
+      });
+    }
+  });
 };
+
+UPYUN.prototype.getFileInfo = function(bucket, relativePath, callback) {
+  var scope = this,
+      path = '/' + bucket + '/' + relativePath;
+
+  scope.request('HEAD', path, null, 0, {}, callback);
+};
+
+UPYUN.prototype.deleteFile = function(bucket, relativePath, callback) {
+  var scope = this,
+      path = '/' + bucket + '/' + relativePath;
+
+  scope.request('DELETE', path, null, 0, {}, callback);
+};
+
+UPYUN.prototype.createFolder = function(bucket, relativePath, callback) {
+  var scope = this,
+      path = '/' + bucket + '/' + relativePath,
+      data = 'folder=true',
+      dataLength = data.length;
+
+  scope.request('POST', path, data, dataLength, {}, callback);
+};
+
+UPYUN.prototype.deleteFolder = UPYUN.prototype.deleteFile;
+
+UPYUN.prototype.getFileList = function(bucket, relativePath, callback) {
+  var scope = this,
+      path = '/' + bucket + '/' + relativePath;
+
+  scope.request('GET', path, null, 0, callback);
+};
+
+UPYUN.prototype.getUsage = function(bucket, callback) {
+  var scope = this,
+      path = '/' + bucket + '/?usage';
+
+  scope.request('GET', path, null, 0, callback);
+}

@@ -49,9 +49,8 @@ function eventsUpload() {
           operator: localStorage['operator_name_' + getBucketName()],
           password: localStorage['operator_password_' + getBucketName()],
           bucket: getBucketName(),
-          path: path,
+          path: (path ? path + '/' : '') + file.name,
           fileType: file.type,
-          fileName: file.name,
           fileSize: file.size,
           base64Data: this.result.split(',')[1]
         });
@@ -65,13 +64,12 @@ chrome.runtime.onMessage.addListener(function(result) {
 
   /* Upload File Custom Actions */
   if(result.action === 'upyun_api_upload_message') {
-    if (result.data.code === 0) {
-      var url = 'http://' + result.bucket + '.b0.upaiyun.com' + '/' + (result.path ? result.path + '/' : '') + result.filename;
-      document.getElementById('upload_url').innerText = url;
-      document.getElementById('upload_url').href = url;
+    if (result.rawdata.code === 0) {
+      document.getElementById('upload_url').innerText = result.rawdata.data.url;
+      document.getElementById('upload_url').href = result.rawdata.data.url;
       document.getElementsByClassName('cm_upload')[0].setAttribute('data-step', 'upload_result');
     } else {
-      document.getElementById('upload_error_message').innerText = result.data.message;
+      document.getElementById('upload_error_message').innerText = result.rawdata.data.message;
       document.getElementsByClassName('cm_upload')[0].setAttribute('data-step', 'upload_error');
     }
   }

@@ -42,13 +42,10 @@ function upyunAPIUpload(options, sender) {
 
   var file = base64toBlob(options.base64Data, options.fileType, options.fileName);
 
-  upyun.upload(options.bucket, options.path, file, options.fileName, options.fileSize, function(result) {
+  upyun.upload(options.bucket, options.path, file, options.fileSize, function(result) {
     chrome.tabs.sendMessage(sender.tab.id, {
       action: 'upyun_api_upload_message',
-      bucket: options.bucket,
-      path:  options.path,
-      filename: options.fileName,
-      data: result
+      rawdata: result
     })
   });
 };
